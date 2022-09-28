@@ -27,7 +27,7 @@
             if(window.location.hash.indexOf("debug") === -1){
                 $("#h2_header").hide(); $("#attributeList").hide(); $("div.buttons").hide(); $("#progress").show();
             } else {
-                $("#h2_header").show(); $("#attributeList").show(); $("div.buttons").hide(); $("#progress").hide();
+                $("#h2_header").show(); $("#attributeList").show(); $("div.buttons").show(); $("#progress").hide();
             }
         }
         window.onhashchange = toggleView;
