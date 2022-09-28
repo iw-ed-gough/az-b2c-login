@@ -11,136 +11,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
     <style>
         :root {
-            /* --colour-primary: #FFFFFF;
-            --colour-back: #E10A0A; */
-            --colour-primary: #E10A0A;
-            --colour-back: #FFFFFF;
+            --colour-primary:#E10A0A;
+            --colour-back:#FFFFFF;
         }
-        body {
-            border: 0;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: var(--colour-back);
-            text-align: center;
-        }
-        h2 {
-            color: var(--colour-primary);
-        }
-        a.helpLink {
-            display: none;
-        }
-        #api {
-            color: var(--colour-primary);
-            margin: auto;
-            width: 350px;
-            text-align: left;
-            padding: 5px;
-        }
-        #api ul {
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-        #api ul li {
-            list-style-type: none;
-        }
-        #api ul li div {
-            padding: 0 0 10px 0;
-        }
-        #api .buttons {
-            text-align: right;
-        }
-        #api .buttons button{
-            border: 1px solid var(--colour-primary);
-            padding: 5px 10px;
-            background-color: var(--colour-back);
-            color: var(--colour-primary);
-            cursor: pointer;
-        }
-        #api ul li div label {
-            font-weight: bold;
-        }
-        #api ul li div input {
-            width: 320px;
-            border: 1px solid var(--colour-primary);
-            padding: 2px 4px;
-            background-color: var(--colour-back);
-            color: var(--colour-primary);
-        }
-        #api ul li div p {
-            padding: 0 0 10px 0;
-            margin: 0;
-        }
-        .intro,.heading,#verifying_blurb,#cancel {
-            display: none;
-        }
-
-        #progress {
-            position:absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        #progress .message {
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: medium;
-            color: var(--colour-primary);
-        }
-        #progress .spinner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 200px;
-            width: 200px;
-        }
-        #progress .spinner div {
-            animation: rotation 2s infinite linear;
-            height: 100px;
-            width: 100px;
-            border-radius: 100px;
-            border: 10px solid transparent;
-            border-top-color: var(--colour-primary);
-            border-bottom-color: var(--colour-primary);
-        }
-        @keyframes rotation {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(359deg);
-            }
-        }
+        body{border:0;margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;background-color:var(--colour-back);text-align:center;}h2{color:var(--colour-primary);}a.helpLink{display:none;}#api{color:var(--colour-primary);margin:auto;width:350px;text-align:left;padding:5px;}#api ul{margin:0;padding:0;border:0;}#api ul li{list-style-type:none;}#api ul li div{padding:0 0 10px 0;}#api .buttons{text-align:right;}#api .buttons button{border:1px solid var(--colour-primary);padding:5px 10px;background-color:var(--colour-back);color:var(--colour-primary);cursor:pointer;}#api ul li div label{font-weight:bold;}#api ul li div input{width:320px;border:1px solid var(--colour-primary);padding:2px 4px;background-color:var(--colour-back);color:var(--colour-primary);}#api ul li div p{padding:0 0 10px 0;margin:0;}.intro,.heading,#verifying_blurb,#cancel{display:none;}#progress{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;top:0;bottom:0;left:0;right:0;}#progress .message{font-weight:bold;text-transform:uppercase;font-size:medium;color:var(--colour-primary);}#progress .spinner{display:flex;align-items:center;justify-content:center;height:200px;width:200px;}#progress .spinner div{animation:rotation 0.7s infinite ease;height:100px;width:100px;border-radius:100px;border:10px solid transparent;border-top-color:var(--colour-primary);border-bottom-color:var(--colour-primary);}@keyframes rotation{from{transform:rotate(0deg);}to{transform:rotate(359deg);}}
     </style>
 </head>
 <body>
     <p id="page_loaded_msg" role="alert" aria-live="assertive" tabindex="-1" aria-label="Page has been loaded successfully"></p>
     <h2 id="h2_header">FIDO Authentication</h2>
     <div id="api"></div>
-    <div id="progress">
-        <div>&nbsp;</div>
-        <div class="spinner"><div></div></div>
-        <div class="message">Authenticating...</div>
-    </div>
+    <div id="progress"><div>&nbsp;</div><div class="spinner"><div></div></div><div class="message">Authenticating...</div></div>
     <script>
         var toggleView = () => {
             if(window.location.hash.indexOf("debug") === -1){
-                $("#h2_header").hide();
-                $("#api").hide();
-                $("#progress").show();
+                $("#h2_header").hide(); $("#attributeList").hide(); $("div.buttons").hide(); $("#progress").show();
             } else {
-                $("#h2_header").show();
-                $("#api").show();
-                $("#progress").hide();
+                $("#h2_header").show(); $("#attributeList").show(); $("div.buttons").hide(); $("#progress").hide();
             }
         }
-
+        window.onhashchange = toggleView;
         toggleView();
 
         $(function () {
@@ -148,8 +38,6 @@
                 window.webkit.messageHandlers.toggleMessageHandler.postMessage($("#challenge").val());
             }
         });
-        window.onhashchange = toggleView;
     </script>
-
 </body>
 </html>
